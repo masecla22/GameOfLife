@@ -33,9 +33,9 @@ if(style==1)
   for(int i=0;i<getSlash(opts);i++)
   {
     if(vals[i]==1)
-    cout<<">";
+    cout<<"> ";
     showArg(opts,i);
-    cout<<" "<<endl;
+    cout<<"   "<<endl;
   }
 }
 if(style==2)
@@ -55,9 +55,10 @@ cout<<"                           ";
 }
 int gui(char opts[255],int style=1)
 {
+  system("cls");
   if(style==1)
   {
-  cout<<">";
+  cout<<"> ";
   int vals[100];
   for(int i=0;i<getSlash(opts);i++)
   {
@@ -68,11 +69,18 @@ int gui(char opts[255],int style=1)
   while(2)
   {
     int a=getch();
+    ShowConsoleCursor(false);
     clear();
-    if(a==80 && pos<(getSlash(opts)-1))
-      pos++;
-    if(a==72 && pos>0)
-      pos--;
+    if(a==80)
+      if(pos==(getSlash(opts)-1))
+        pos=0;
+      else
+        pos++;
+    if(a==72)
+      if(pos==0)
+        pos=(getSlash(opts)-1);
+      else
+        pos--;
     if(a==13)
     {
       system("cls");

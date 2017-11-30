@@ -1,4 +1,6 @@
 #include "mattgui.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -59,16 +61,14 @@ void doValue(char a[255],int value)
   {
     if(a[i]==':')
     {
-      i+=2;
-      setts[i][a]='\0';
+      i--;
+      a[i]='\0';
     }
   }
   char val[255];
   itoa(value,val,10);
-  cout<<"VAL "<<val<<endl;
-  strcat(setts[a]," : ");
-  strcat(setts[a],val);
-
+  strcat(a," : ");
+  strcat(a,val);
 }
 int chgValue(char file[255],char name[255],int value)
 {
@@ -80,15 +80,12 @@ int chgValue(char file[255],char name[255],int value)
   {
     fin.getline(setts[i],255);
   }
-  for(int i=0;i<lines(file);i++)
-  {
-    cout<<"LOL  "<<setts[i]<<endl;
-  }
   int a = getLine(file,name);
-  cout<<"setts[a]  "<<setts[a]<<endl;
+  doValue(setts[a],value);
   CFile(file);
+  ofstream fout(file,ios::app);
   for(int i=0;i<f;i++)
   {
-    fin<<setts[i]<<endl;
+    fout<<setts[i]<<endl;
   }
 }
